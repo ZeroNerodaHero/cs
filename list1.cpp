@@ -19,9 +19,9 @@ node* search(node *head, int key){
 #endif
 }
 
-void insert(node*& head, int data, int index, int pos=0){
+void insert(node*& head, int data, int pos=0){
 	node *cur=head;
-	node *newptr=new node(data,index);
+	node *newptr=new node(data);
 
 	if(pos==0 || head==nullptr){
 		newptr->next = head;
@@ -69,7 +69,7 @@ void reverse(node*& head){
 void traverse(node* head){
 	node *cur = head;
 	while(cur){
-		std::cout << cur->value << " " << cur->index << ' ';
+		std::cout << cur->value << " ";
 		cur=cur->next;
 	}
 	std::cout << std::endl;
