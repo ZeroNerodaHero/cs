@@ -2,6 +2,8 @@
 #include <iostream>
 #include <exception>
 #define SIZE 256
+#define R 13
+#define N 11
 
 class hashtbl{
  public:	
@@ -14,7 +16,7 @@ class hashtbl{
  private:
 	node* _hashtbl[SIZE];
 	int hash(int num){
-        return ((num >> 8)^(num << 4))%SIZE;
+        return ((num%R)^(num%N))%SIZE;
     }
 };
 
