@@ -11,17 +11,50 @@ struct node{
 
 class bst {
 public:
-
-
 	class iterator {
-		iterator(node *n==nullptr) {
+	public:
+		iterator(node *n=nullptr) {
+			if (n == nullptr) {
+				cur = nullptr;
+				return;
+			}
+
+			while (n) {
+				st.push(n);
+				n = n->left;
+			}
+			cur = st.top();
+			st.pop();
 		} 
 
-	operator !=()
+		bool operator !=(const iterator &o) const{
+			return cur != o.cur;
+		}
 
-	operator *
+		int & operator * () {
+			return cur->key;
+		}
 
-	operator ++()
+		iterator &operator ++(){
+			cur = cur->right;
+			if(cur == nullptr) {
+				if (!st.empty()) {
+					cur = st.top();
+					st.pop();
+				}
+			} else {
+				while(cur) {
+                	st.push(cur);
+                	cur = cur->left;
+            	}
+            	cur = st.top();
+            	st.pop();
+        	}
+			return *this;
+		}
+	private:
+		stack<node *> st;
+		node *cur;
 	};
 
 	iterator begin() {
