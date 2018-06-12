@@ -1,6 +1,6 @@
 #include <iostream>
 
-void lsp(char* pat, int b[]){
+void lps(char* pat, int b[]){
 	int m = strlen(pat);
 	int i = 0, j = -1;
 	b[0] = -1;
@@ -15,22 +15,20 @@ void lsp(char* pat, int b[]){
 }
 
 void search(char* txt, char* pat){
-	int m = strlen(txt);
-	int n = strlen(pat);
-	int b[n];
-	lsp(pat,b);
+	int n = strlen(txt);
+	int m = strlen(pat);
+	int b[m+1];
+	lps(pat,b);
 	
-	for(int i = 0; i < m;){
-		int j = 0;
-		for(; j < n; j++){
-			//std::cout << "i-\t" << i << "j-\t" << j << std::endl;
-			while(j >= 0 && txt[i] != pat[j]){
-				j = b[j];
-			}
-			i++;
-			if(j == -1) break;
+	for(int i = 0, j = 0; i < n;){;
+		while(j >= 0 && txt[i] != pat[j]){
+			j = b[j];
 		}
-		if(j == n) std::cout << i - n << std::endl;
+		i++; j++;
+		if(j == m){
+			std::cout << i - m << std::endl;
+			j = b[j];
+		}
 	} 
 }
 
