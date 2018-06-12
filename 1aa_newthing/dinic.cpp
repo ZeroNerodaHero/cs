@@ -4,12 +4,12 @@ using namespace std;
 
 #define N 100
 
-class fulk{
+class dinic{
  public:
-	fulk(int size){
-		VSIZE = size;
-		for(int i = 0; i < VSIZE; i++){
-			for(int j = 0; j < VSIZE; j++){
+	dinic(int size){
+		vsize = size;
+		for(int i = 0; i < vsize; i++){
+			for(int j = 0; j < vsize; j++){
 				adj[i][j] = 0;
 			}	
 		}
@@ -20,7 +20,7 @@ class fulk{
 	}
 
 	bool bfs(int s,int t,int level[]){
-		for(int i = 0; i < VSIZE; i++){
+		for(int i = 0; i < vsize; i++){
 			level[i] = -1;
 		}
 		queue<int> q;
@@ -30,7 +30,7 @@ class fulk{
 			int u = q.front();
 			q.pop();
 			//std::cout << u << ' ';
-			for(int i = 0; i < VSIZE; i++){
+			for(int i = 0; i < vsize; i++){
 				if(adj[u][i] && level[i] == -1){
 					q.push(i);
 					level[i] = level[u]+1;
@@ -43,7 +43,7 @@ class fulk{
 	int blocking(int s, int t,int flow,int level[]){
 		std::cout << s << "\t" << t << std::endl;
 		if(s == t) return flow;
-		for(int i = 0; i < VSIZE; i++){
+		for(int i = 0; i < vsize; i++){
 			if(adj[s][i] && level[i] == level[s]+1){
 				int tmpflow = std::min(flow,adj[s][i]);
 				int pathflow = blocking(i,t,tmpflow,level);
@@ -58,7 +58,7 @@ class fulk{
 	}
 
 	int maxflow(int s, int t){
-		int level[VSIZE];
+		int level[vsize];
 		int flow = 0;
 		while(bfs(s,t,level)){
 			int pathflow = blocking(s,t,INT_MAX,level);
@@ -70,12 +70,12 @@ class fulk{
 		return flow;
 	}
  private:
-	int VSIZE;
+	int vsize;
 	int adj[N][N];
 };
 
 int main(){
-	fulk g(6);
+	dinic g(6);
 	g.addEdge(0, 1, 16 );
     g.addEdge(0, 2, 13 );
     g.addEdge(1, 2, 10 );
