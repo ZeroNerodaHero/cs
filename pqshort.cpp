@@ -22,7 +22,7 @@ void add_edge(int u, int v, int dist = 1){
     adj[v][u] += dist;
 }
 
-void shortest(int src){
+void dijkstra(int src){
     int dist[N];
     memset(dist, 0x1F, sizeof(dist));
     bool visited[N];
@@ -51,7 +51,7 @@ void shortest(int src){
     }
 }
 
-void shortpts(){
+void warshall(){
     int d[N][N];
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
@@ -107,7 +107,7 @@ int main(){
     add_edge(5,4,10);   
 
     print();    
-    shortest(0);
-    shortpts();
+    dijkstra(0);
+    warshall();
     return 0;
 }
